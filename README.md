@@ -1,38 +1,50 @@
-# Teste Técnico Mobile BeTalent
+# Teste Técnico Mobile BeTalent 
 
-Este é um repositório para Testes Técnicos em Mobile da Be. Ele é destinado a pessoas que participam de nossos processos seletivos. 
+Este repositório contém a minha solução para o Teste Técnico Mobile da BeTalent. O desafio consistiu em construir uma aplicação mobile que exibe uma tabela de funcionários, com funcionalidades de pesquisa e formatação de dados. Utilizei **Flutter** para desenvolver a aplicação, seguindo as diretrizes e requisitos propostos.
 
-Se você chegou até aqui por meio de um formulário de Teste Técnico, siga em frente. Caso contrário, acompanhe a BeTalent no [Linkedin](https://www.linkedin.com/company/betalenttech), [Instagram](https://www.instagram.com/betalent.tech/), [Facebook](https://web.facebook.com/bemobile.tech) ou na nossa newsletter [BeTalent Academy](https://beacademy.substack.com/). Divulgamos novos processos seletivos por lá.
+---
 
-## Desafio
+## 📱 Sobre o Projeto
 
-O Teste Técnico Mobile BeTalent consiste em construir a visualização de uma tabela com dados que virão de uma API simulada.
+O objetivo do projeto foi criar uma interface que exibe uma lista de funcionários, com as seguintes informações:
 
-### Mockup
+- **Imagem** (thumbnail do usuário);
+- **Nome**;
+- **Cargo**;
+- **Data de admissão**;
+- **Telefone**.
 
-Este é o [projeto em Figma](https://www.figma.com/design/Lpdera6rS8SztMUAwzkpN0/Teste-T%C3%A9cnico-Mobile-BeTalent?node-id=1-4&node-type=canvas&t=NI5lQZvrO1hsQCqz-0) para você se orientar. Nele, você encontrará o guia de estilos e o design da tela a ser construída.
+Além disso, a aplicação permite filtrar os funcionários por **nome**, **cargo** ou **telefone** por meio de um campo de pesquisa. As datas e telefones são formatados diretamente no front-end.
 
-### Requisitos Gerais
+---
 
-Deve-se utilizar React Native ou Flutter para a construção da aplicação.
+## 🎨 Mockup
 
-É permitido utilizar libs externas, mas recomenda-se que seja o mínimo possível.
+O design da aplicação foi baseado no [projeto no Figma](https://www.figma.com/design/Lpdera6rS8SztMUAwzkpN0/Teste-T%C3%A9cnico-Mobile-BeTalent?node-id=1-4&node-type=canvas&t=NI5lQZvrO1hsQCqz-0), que forneceu o guia de estilos e a estrutura da tela.
 
-A tabela deve conter as seguintes colunas:
+---
 
-- imagem (thumb do/a usuário/a);
-- nome;
-- cargo
-- data de admissão;
-- telefone.
+## ✅ Requisitos Cumpridos
 
-Também deve ser possível realizar pesquisa na tabela por meio de um input. O input de pesquisa deve permitir filtrar dados por cargo, nome e telefone.
+- **Tecnologia**: Utilizei **Flutter** para o desenvolvimento.
+- **Funcionalidades**:
+  - Exibição de uma lista de funcionários com imagem, nome, cargo, data de admissão e telefone.
+  - Campo de pesquisa que filtra os funcionários por **nome**, **cargo** ou **telefone**.
+  - Formatação de datas e telefones no front-end.
+- **Organização**: O código foi estruturado de forma modular, seguindo boas práticas de desenvolvimento.
 
-Datas e telefones devem ser formatadas no front-end e não na API.
+---
 
-Tenha instaladas em sua máquina as ferramentas [Git](https://git-scm.com/), [Node.js](https://nodejs.org/en/) e [Yarn](https://yarnpkg.com/), e [React Native](https://reactnative.dev/) ou [Dart](https://dart.dev/) e [Flutter](https://flutter.dev/), para poder trabalhar no projeto.
+## 🛠️ Pré-requisitos
 
-### Acesso aos dados da API simulada
+Para rodar o projeto, você precisará das seguintes ferramentas instaladas em sua máquina:
+
+- [Git](https://git-scm.com/)
+- [Flutter](https://flutter.dev/) (com Dart incluso)
+
+---
+
+## ‼️Acesso aos dados da API simulada
 
 Para ter acesso aos dados que alimentarão o projeto, faça o seguinte:
 
@@ -46,19 +58,37 @@ Para ter acesso aos dados que alimentarão o projeto, faça o seguinte:
 Caso você tenha problemas com o json-server, tente rodá-lo com `npx json-server db.json` ou 
 com `yarn json-server <path>/db.json`, em que `<path>` é o caminho completo até o diretório em que o arquivo db.json está localizado. Se mesmo assim não funcionar, busque ajuda na web.
 
-### Critérios de Avaliação
+obs: utilizei `npx json-server db.json`
+## 📂 Estrutura do Projeto
 
-Em ordem de relevância, avaliaremos:
+O projeto foi organizado da seguinte forma:
+```
+lib/
+├── main.dart                # Ponto de entrada da aplicação
+├── models/                  # Modelos de dados 
+├── providers/               # Providers para gerenciamento de estado 
+├── services/                # Serviços para consumo da API 
+├── utils/                   # Utilitários
+├── widgets/                 # Widgets
+└── view/                    # Tela da aplicação
+|
+└── test/  
+```
 
-1. lógica de programação;
-2. organização (do código e dos arquivos);
-3. proficiência no uso de React Native e/ou Flutter;
-4. README, que deve conter, pelo menos, as seguintes informações: sobre o projeto, pré-requisitos e instruções para rodar a aplicação.
+---
 
-É um diferencial na avaliação o uso de TypeScript.
+##  Critérios de Avaliação
 
-### Envio da Solução
+ 1. Lógica de Programação
 
-O projeto deverá ser hospedado em um repositório no seu GitHub. O link do repositório deverá ser fornecido por meio do formulário de Teste Técnico encaminhado ao seu e-mail. Não serão aceitos links de projetos enviados por outros meios.
+ 2. Organização
 
-Demais instruções e regras serão instruídas nos formulários e nas comunicações do processo seletivo do qual você está participando.
+ 3. Proficiência em Flutter
+
+ 4. README
+
+---
+
+## 📤 Envio da Solução
+
+O projeto foi hospedado no meu repositório do GitHub. O link para o repositório foi enviado por meio do formulário de Teste Técnico.
