@@ -88,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 28),
             Expanded(
               child: Consumer<EmployeeProvider>(
                 builder: (context, provider, child) {
@@ -103,18 +103,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         decoration: BoxDecoration(
                           color: AppColors.White,
                           borderRadius: BorderRadius.circular(12),
-                          boxShadow: [AppShadows.primaryShadow],
+                          boxShadow: [AppShadows.lightShadow],
                         ),
                         child: Column(
                           children: [
                             Container(
                               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                               decoration: const BoxDecoration(
-                                color: AppColors.Gray10, // Fundo cinza conforme imagem
+                                color: AppColors.Gray10,
                                 borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
                               ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start, // Alinha à esquerda com espaço pequeno
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Text(
                                     'Foto',
