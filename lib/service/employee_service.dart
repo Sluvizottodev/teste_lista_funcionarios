@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '../model/employee_model.dart';
 
 class EmployeeService {
-  final String baseUrl = 'http://localhost:3000/employees';
+  final String baseUrl = 'http://10.0.2.2:3000/employees';
 
   Future<List<Employee>> fetchEmployees() async {
     final response = await http.get(Uri.parse(baseUrl));
