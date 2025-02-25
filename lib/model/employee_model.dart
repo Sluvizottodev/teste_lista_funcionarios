@@ -17,12 +17,12 @@ class Employee {
 
   factory Employee.fromJson(Map<String, dynamic> json) {
     return Employee(
-      id: json['id'],
-      name: json['name'],
-      job: json['job'],
+      id: json['id'] ?? '',
+      name: json['name']?.toString() ?? 'Nome não informado',
+      job: json['job']?.toString() ?? 'Cargo não informado',
       admissionDate: DateTime.parse(json['admission_date']),
-      phone: json['phone'],
-      image: json['image'],
+      phone: json['phone'] != null ? json['phone'].toString().replaceAll(RegExp(r'\D'), '') : '',
+      image: json['image'] ?? '',
     );
   }
 }
