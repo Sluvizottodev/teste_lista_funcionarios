@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:teste_pratico_mobile/utils/colors.dart';
-import 'package:teste_pratico_mobile/utils/shadow.dart';
 import 'package:teste_pratico_mobile/utils/typography.dart';
+import '../utils/shadow.dart';
 import '../utils/space.dart';
 
 class SearchField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
-  final ValueChanged<String>? onChanged;
+  final ValueChanged<String> onChanged;
 
   const SearchField({
     super.key,
     required this.controller,
     this.hintText = 'Pesquisar',
-    this.onChanged,
+    required this.onChanged,
   });
 
   @override
@@ -24,9 +24,7 @@ class SearchField extends StatelessWidget {
         borderRadius: BorderRadius.circular(40),
         boxShadow: [AppShadows.primaryShadow],
       ),
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.regular16,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.regular16),
       child: TextField(
         controller: controller,
         onChanged: onChanged,
