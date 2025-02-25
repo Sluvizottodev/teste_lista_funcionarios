@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:teste_pratico_mobile/utils/colors.dart';
-import 'package:teste_pratico_mobile/utils/shadow.dart';
-import 'package:teste_pratico_mobile/utils/typography.dart';
-import '../utils/space.dart';
 import '../provider/employee_provider.dart';
+import '../utils/shadow.dart';
 import '../widgets/employee_card.dart';
 import '../widgets/search.dart';
+import '../utils/colors.dart';
+import '../utils/typography.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,113 +19,142 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    _searchController
-        .dispose();
+    _searchController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => EmployeeProvider()..loadEmployees(),
-      child: Scaffold(
-        backgroundColor: AppColors.White,
-        body: SafeArea(
-          child: Consumer<EmployeeProvider>(
-            builder: (context, provider, child) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+    return Scaffold(
+      backgroundColor: AppColors.White,
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(AppSpacing.regular16),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const CircleAvatar(
-                          backgroundColor: AppColors.Gray10,
-                          child: Text('CG',
-                              style: TextStyle(color: AppColors.Black)),
-                        ),
-                        Stack(
-                          children: [
-                            IconButton(
-                              icon: const Icon(Icons.notifications_none,
-                                  size: 28),
-                              onPressed: () {},
+                  const CircleAvatar(
+                    radius: 24,
+                    backgroundColor: AppColors.Gray10,
+                    child: Text('CG', style: TextStyle(color: AppColors.Black)),
+                  ),
+                  Stack(
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.notifications_none, size: 28),
+                        onPressed: () {},
+                      ),
+                      Positioned(
+                        right: 4,
+                        top: 4,
+                        child: Container(
+                          width: 20,
+                          height: 20,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: AppColors.BluePrimary,
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Text(
+                            '02',
+                            style: TextStyle(
+                              color: AppColors.White,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
                             ),
-                            Positioned(
-                              right: 4,
-                              top: 4,
-                              child: Container(
-                                padding: const EdgeInsets.all(4),
-                                decoration: const BoxDecoration(
-                                  color: AppColors.BluePrimary,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: const Text(
-                                  '02',
-                                  style: TextStyle(
-                                    color: AppColors.White,
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text('Funcionários', style: AppTypography.displayLarge),
+            ),
+            const SizedBox(height: 12),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: SearchField(
+                controller: _searchController,
+                hintText: 'Pesquisar',
+                onChanged: (query) {
+                  Provider.of<EmployeeProvider>(context, listen: false).filterEmployees(query);
+                },
+              ),
+            ),
+            const SizedBox(height: 12),
+            Expanded(
+              child: Consumer<EmployeeProvider>(
+                builder: (context, provider, child) {
+                  if (provider.isLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (provider.employees.isEmpty) {
+                    return const Center(child: Text('Nenhum funcionário encontrado.'));
+                  } else {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.White,
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: [AppShadows.primaryShadow],
+                        ),
+                        child: Column(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                              decoration: const BoxDecoration(
+                                color: AppColors.Gray10, // Fundo cinza conforme imagem
+                                borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start, // Alinha à esquerda com espaço pequeno
+                                children: [
+                                  Text(
+                                    'Foto',
+                                    style: AppTypography.displayMedium.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColors.Black,
+                                    ),
                                   ),
-                                ),
+                                  const SizedBox(width: 25),
+                                  Text(
+                                    'Nome',
+                                    style: AppTypography.displayMedium.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColors.Black,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child: ListView.separated(
+                                itemCount: provider.employees.length,
+                                separatorBuilder: (context, index) => const Divider(height: 1, color: AppColors.Gray10),
+                                itemBuilder: (context, index) {
+                                  return EmployeeCard(
+                                    employee: provider.employees[index],
+                                    showDivider: index < provider.employees.length - 1,
+                                  );
+                                },
                               ),
                             ),
                           ],
                         ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: AppSpacing.regular16),
-                    child:
-                        Text('Funcionários', style: AppTypography.displayLarge),
-                  ),
-                  const SizedBox(height: AppSpacing.regular16),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: AppSpacing.regular16),
-                    child: SearchField(
-                      controller: _searchController,
-                      // Passa o controller para o SearchField
-                      hintText: 'Pesquisar',
-                      onChanged: provider.filterEmployees,
-                    ),
-                  ),
-                  const SizedBox(height: AppSpacing.regular16),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: AppSpacing.regular16),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: AppColors.Gray05,
-                          borderRadius:
-                              BorderRadius.circular(AppSpacing.little08),
-                          boxShadow: [AppShadows.primaryShadow],
-                        ),
-                        child: provider.isLoading
-                            ? const Center(child: CircularProgressIndicator())
-                            : provider.employees.isEmpty
-                                ? const Center(
-                                    child:
-                                        Text('Nenhum funcionário encontrado.'))
-                                : ListView.builder(
-                                    itemCount: provider.employees.length,
-                                    itemBuilder: (context, index) {
-                                      return EmployeeCard(
-                                          employee: provider.employees[index]);
-                                    },
-                                  ),
                       ),
-                    ),
-                  ),
-                ],
-              );
-            },
-          ),
+                    );
+                  }
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );

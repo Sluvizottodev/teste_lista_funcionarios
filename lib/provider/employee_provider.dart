@@ -17,7 +17,7 @@ class EmployeeProvider extends ChangeNotifier {
 
     try {
       _allEmployees = await _service.fetchEmployees();
-      _filteredEmployees = _allEmployees;
+      _filteredEmployees = List.from(_allEmployees); // Garante cópia para evitar referência direta
     } catch (e) {
       _allEmployees = [];
       _filteredEmployees = [];
@@ -29,11 +29,11 @@ class EmployeeProvider extends ChangeNotifier {
 
   void filterEmployees(String query) {
     if (query.isEmpty) {
-      _filteredEmployees = _allEmployees;
+      _filteredEmployees = List.from(_allEmployees);
     } else {
-      _filteredEmployees = _allEmployees.where((employee) =>
-      employee.name.toLowerCase().contains(query.toLowerCase())
-      ).toList();
+      _filteredEmployees = _allEmployees
+          .where((employee) => employee.name.toLowerCase().contains(query.toLowerCase()))
+          .toList();
     }
     notifyListeners();
   }
